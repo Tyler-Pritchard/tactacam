@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-// import { Container, Row, Col } from 'reactstrap';
+import { Container, Card, CardBody } from 'reactstrap';
 import "../App.css";
 import { createApi } from "unsplash-js";
 
@@ -15,15 +15,19 @@ const PhotoComp = ({ photo }) => {
 
   return (
     <Fragment>
-      <img className="img" src={urls.regular} />
-      <a
-        className="credit"
-        target="_blank"
-        rel="noreferrer"
-        href={`https://unsplash.com/@${user.username}`}
-      >
-        {user.name}
-      </a>
+            <Card className="card">
+              <img className="img" src={urls.regular} alt="" />
+              <CardBody className="credit">
+                <a
+                  className="credit"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://unsplash.com/@${user.username}`}
+                >
+                  {user.name}
+                </a>
+              </CardBody>
+            </Card>
     </Fragment>
   );
 };
@@ -53,15 +57,15 @@ const Body = () => {
     );
   } else {
     return (
-      <div className="feed">
-        <ul className="columnUl">
-          {data.response.results.map(photo => (
-            <li key={photo.id} className="li">
-              <PhotoComp photo={photo} />
-            </li>
-          ))}
-        </ul>
-      </div>
+        <Container fluid className="container">
+            {data.response.results.map(photo => (
+              <div  className="li">
+                <li key={photo.id}>
+                  <PhotoComp photo={photo} />
+                </li>
+              </div>
+            ))}
+        </Container>
     );
   }
 };
