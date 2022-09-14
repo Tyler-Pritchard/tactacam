@@ -32,6 +32,13 @@ const PhotoComp = ({ photo }) => {
   );
 };
 
+const Searchbar = () => {
+  <div>
+  <Input
+  />
+</div>
+}
+
 const Body = () => {
   const [data, setPhotosResponse] = useState(null);
 
@@ -73,6 +80,7 @@ const Body = () => {
 export const Home = () => {
   return (
     <main className="root">
+      <Searchbar />
       <Body />
     </main>
   );
