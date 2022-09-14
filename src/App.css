@@ -31,3 +31,11 @@
   align-items: center;
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  width: 50rem;
+  padding: 1rem 0rem 1rem 3rem;
+  margin: 1rem;
+  align-items: center;
+}
