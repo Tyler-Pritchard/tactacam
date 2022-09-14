@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Container, Card, CardBody, Input, Button, Label, Form, FormGroup } from 'reactstrap';
+import { Container, Card, CardBody } from 'reactstrap';
 import "../App.css";
 import { createApi } from "unsplash-js";
+import Search from "./Search";
 
 
 const api = createApi({
@@ -33,12 +34,11 @@ const PhotoComp = ({ photo }) => {
 };
 
 const Body = () => {
-  const [query, setQuery] = useState("");
   const [data, setPhotosResponse] = useState(null);
 
   useEffect(() => {
     api.search
-      .getPhotos({ query: `cats`, orientation: "landscape" })
+      .getPhotos({ query: `${Search.searchterm}`, orientation: "landscape" })
       .then(result => {
         setPhotosResponse(result);
       })
@@ -58,26 +58,6 @@ const Body = () => {
     );
   } else {
     return (
-      <div>
-        <div className="search-bar">
-          <Form action="/" method="get">
-            <FormGroup>
-              <Label for="query">
-                Image Search:
-              </Label>
-              <Input
-                placeholder="Search Term"
-                id="query"
-                type="text"
-              />
-              <Button className="submit-button" type="submit"
-                onSubmit={event => setQuery(event.target.value)}
-              >
-                Submit
-              </Button>
-            </FormGroup>
-          </Form>
-    </div>
         <Container fluid className="container">
             {data.response.results.map(photo => (
               <div  className="li">
@@ -87,7 +67,6 @@ const Body = () => {
               </div>
             ))}
         </Container>
-      </div>
     );
   }
 };
@@ -95,6 +74,7 @@ const Body = () => {
 export const Home = () => {
   return (
     <main className="root">
+      <Search />
       <Body />
     </main>
   );
